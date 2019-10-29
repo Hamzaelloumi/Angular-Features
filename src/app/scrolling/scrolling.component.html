@@ -1,0 +1,10 @@
+<!-- <table>
+  <tr  *ngFor="let i of numbers" class="number">
+    <td>{{i}}</td>
+  </tr>
+  </table> -->
+  <cdk-virtual-scroll-viewport itemSize="50" class="container">
+<div *cdkVirtualFor="let i of numbers"  class="number">
+{{i}}
+</div>
+</cdk-virtual-scroll-viewport>

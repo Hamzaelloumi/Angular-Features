@@ -1,0 +1,106 @@
+
+<h1 class="display-3 text-center">Model Driven Forms</h1>
+<div class="container">
+  
+        <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+            <div class="form-group" >
+                <label for="fullname">FullName</label>
+                <input type="text" name="fullname"
+                class="form-control"
+                formControlName="fullName"
+                [ngClass]="{'is-valid': fullName.valid && (fullName.dirty || fullName.touched) , 
+                'is-invalid': fullName.invalid && (fullName.dirty || fullName.touched)}"
+                />
+                <div class="invalid-feedback"
+                *ngIf="fullName.errors && (fullName.dirty || fullName.touched)"
+                >
+                    <p *ngIf="fullName.errors?.required"> FullName is required </p>
+                </div>
+                </div>
+
+
+                <div class="form-group">
+                        <label for="fullname">Email</label>
+                        <input type="text" name="email"
+                        class="form-control"
+                        formControlName="email"
+                        [ngClass]="{'is-valid': email.valid && (email.dirty || email.touched) , 
+                        'is-invalid': email.invalid && (email.dirty || email.touched)
+                    }"
+                        />
+                    <div class="invalid-feedback"
+                    *ngIf="email.errors && (email.dirty || email.touched)"
+                    >
+                        <p *ngIf="email.errors?.required"> Email is required </p>
+                        <p *ngIf="email.errors?.pattern"> The email adress must contain at least the @ character </p>
+                    </div>
+                        
+                        <pre>Dirty? {{email.dirty}}</pre>
+                        <pre>Pristine? {{email.pristine}}</pre>
+                        <pre>Touched? {{email.touched}}</pre>
+                        <pre>Untouched? {{email.untouched}}</pre>
+                        <pre>Valid? {{email.valid}}</pre>
+                        <pre>Invalid? {{email.invalid}}</pre>
+
+                    </div>
+
+
+
+            <div formGroupName="skills">
+                 <div class="row">
+                        <div class="col">
+                    <label for="skillname">SkillName</label>
+
+                <input type="text" formControlName="skillName" class="form-control"
+                [ngClass]="{'is-valid': skillName.valid && (skillName.dirty || skillName.touched) , 
+                        'is-invalid': skillName.invalid && (skillName.dirty || skillName.touched)
+                    }"
+                
+                />
+
+                <div class="invalid-feedback"
+                *ngIf="skillName.errors && (skillName.dirty || skillName.touched)"
+                >
+                    <p *ngIf="skillName.errors?.required"> skillName is required </p>
+                    <p *ngIf="skillName.errors?.minlength"> The skillName must contain at least 8 characters </p>
+                </div>
+                </div>
+                <div class="col">
+                <label for="experience">Experience</label>
+
+                        <input type="text" placeholder="Experience in Years" 
+                        formControlName="experienceInYears"      class="form-control"/>
+                </div>
+                 </div>
+                <div class="form-group">
+                    <label>Proficiency</label>
+
+
+                <br>
+                    <label class="radio-inline">
+                        <input type="radio" value="beginner" formControlName="proficiency">Beginner
+                    </label>
+                    
+                    <label class="radio-inline">
+                        <input type="radio" value="intermediate" formControlName="proficiency">Intermediate
+                    </label>
+                    
+                    <label class="radio-inline">
+                        <input type="radio" value="advanced" formControlName="proficiency">Advanced
+                    </label>
+                </div>
+            </div>
+
+
+           
+      
+                    <button class="btn btn-primary mr-1" type="submit"  [disabled]="userForm.invalid">Envoyer</button>
+                    <button class="btn btn-primary" type="button" (click)="onLoadDataClick()">LoadData</button>
+          
+        </form>
+
+  
+
+</div>
+
+

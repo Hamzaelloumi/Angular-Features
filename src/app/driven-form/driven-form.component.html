@@ -1,0 +1,108 @@
+<h1 class="display-3 text-center">Template Driven Forms</h1>
+<div class="container">
+    <div class="jumbotron">
+<form #form="ngForm" (ngSubmit)="addUser(form)">
+    <div class="form-group">
+        <label for="name">
+            Name:
+        </label>
+        <input type="text"
+         name="name" 
+        class="form-control"
+        ngModel
+        #nameUser="ngModel"
+        required
+        pattern="[a-zA-Z][a-zA-Z]+"
+        >
+    </div>
+ <!--    <div *ngIf="nameUser?.touched && (nameUser.errors?.required || nameUser.errors?.pattern)" class="alert alert-danger">
+      Name required
+    </div> -->
+    <div *ngIf="nameUser.invalid && (nameUser.dirty || nameUser.touched)" class="alert alert-danger">
+        <div *ngIf="nameUser.errors?.required">
+            Name is required
+        </div>
+        <div *ngIf="nameUser.errors?.pattern">
+                Name invalid
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="contact">
+            Contact:
+        </label>
+        <input type="text"
+         name="contact"
+         class="form-control"
+         ngModel
+         required
+         pattern="[0-9]+"
+         maxlength="10"
+         minlength="10"
+         #contactUser="ngModel"
+         >
+    </div>
+    <div *ngIf="contactUser.invalid && (contactUser.dirty || contactUser.touched)" class="alert alert-danger">
+            <div *ngIf="contactUser.errors?.required">
+                    Contact is required
+            </div>
+           <div *ngIf="contactUser.errors?.pattern || contactUser.errors?.minlength ">
+                Contact Must Be 10 Digits
+            </div>
+           <!--  <div [hidden]="contactUser?.errors?.minlength">
+                    Contact Must Be 10 Caracters
+            </div> -->
+    </div>
+    <div class="form-group"
+ 
+    >
+        <label for="email">
+            Email:
+        </label>
+        <input type="email"
+         name="email"
+         class="form-control"
+         ngModel
+         required
+         #emailUser="ngModel"
+         >
+    </div>
+    <div *ngIf="emailUser.invalid && (emailUser.dirty || emailUser.touched)" class="alert alert-danger">
+            <div *ngIf="emailUser.errors?.required">
+                    Email is required
+            </div>
+    </div>
+
+
+    <div class="form-group">
+        <label>Language</label>
+        <select class="form-control"
+        ngModel
+        name="language"
+        #language="ngModel"     
+        required
+        >
+        <option *ngFor="let lang of langs"
+                [value]="lang">{{lang}}
+        </option>
+        </select>
+    </div>
+    <div *ngIf="language.invalid && (language.dirty || language.touched)" class="alert alert-danger">
+            <div *ngIf="emailUser.errors?.required">
+                    language is required
+            </div>
+    </div>
+
+    <button type="submit" name="button"
+     class="btn btn-success"
+     [disabled]="form.invalid"
+     >Add User</button>
+</form>
+
+</div>
+</div>
+
+<ul class="list-group">
+    <li *ngFor = "let user of userList" class="list-group-item">
+        {{ user.name}} {{user.contact}}
+    </li>
+</ul>
